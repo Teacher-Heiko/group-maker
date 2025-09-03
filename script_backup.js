@@ -6,65 +6,18 @@ let selectedAction = null; // 'new' or 'history'
 
 // Screen management functions
 function showStartScreen() {
-    console.log('Resetting to start screen - wiping everything clean');
-    
-    // Hide all screens except start screen
     document.getElementById('startScreen').style.display = 'block';
     document.getElementById('mainScreen').style.display = 'none';
     document.getElementById('timestampSelection').style.display = 'none';
-    
     // Ensure start controls are visible
-    document.querySelector('.start-controls').style.display = 'block';
-    
-    // Reset ALL state variables to clean slate
+    document.querySelector('.start-controls').style.display = 'block';    // Reset state
     currentClassId = null;
     currentStudents = [];
     selectedAction = null;
-    
-    // Clear groups container completely
-    const groupsContainer = document.getElementById('groupsContainer');
-    if (groupsContainer) {
-        groupsContainer.innerHTML = '';
-    }
-    
-    // Reset all input fields
-    const groupSizeInput = document.getElementById('groupSizeInput');
-    if (groupSizeInput) {
-        groupSizeInput.value = '';
-    }
-    
-    const incompatibleInput = document.getElementById('incompatibleInput');
-    if (incompatibleInput) {
-        incompatibleInput.value = '';
-    }
-    
-    // Hide action buttons that should only show when groups are created
-    const shuffleBtn = document.getElementById('shuffleBtn');
-    const saveBtn = document.getElementById('saveBtn');
-    if (shuffleBtn) shuffleBtn.style.display = 'none';
-    if (saveBtn) saveBtn.style.display = 'none';
-    
+    // Clear any class theme
     // Reset class button selection
-    document.querySelectorAll('.class-btn').forEach(btn => btn.classList.remove('selected'));
-    
-    // Clear any class themes
-    document.body.classList.remove('theme-701', 'theme-702', 'theme-703', 'theme-704');
-    
-    // Clear current class display
-    const classDisplay = document.getElementById('current-class-display');
-    if (classDisplay) {
-        classDisplay.textContent = '';
-    }
-    
-    // Reset timestamp dropdown
-    const timestampDropdown = document.getElementById('historyTimestampDropdown');
-    if (timestampDropdown) {
-        timestampDropdown.innerHTML = '<option value="">Select a timestamp</option>';
-    }
-    
-    console.log('Start screen reset complete - everything wiped clean');
+    document.querySelectorAll('.class-btn').forEach(btn => btn.classList.remove('selected'));    document.body.classList.remove('theme-701', 'theme-702', 'theme-703', 'theme-704');
 }
-
 
 function showMainScreen() {
     document.getElementById('startScreen').style.display = 'none';
