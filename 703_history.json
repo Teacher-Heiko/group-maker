@@ -1,0 +1,47 @@
+[
+  {
+    "timestamp": "2025-09-03T05:40:22.812Z",
+    "groups": [
+      [
+        "Nene",
+        "Win Win"
+      ],
+      [
+        "Prai",
+        "Aerin"
+      ],
+      [
+        "Porsche",
+        "Ozone"
+      ],
+      [
+        "Ik",
+        "Poon"
+      ],
+      [
+        "Koon",
+        "Ampere"
+      ],
+      [
+        "Hong Kong",
+        "Prague"
+      ],
+      [
+        "Iq",
+        "Anya"
+      ],
+      [
+        "Nont",
+        "New"
+      ],
+      [
+        "Gunn"
+      ]
+    ],
+    "incompatiblePairs": [
+      "Anya|Gunn",
+      "Gunn|Hong Kong",
+      "Aerin|Ampere"
+    ]
+  }
+]

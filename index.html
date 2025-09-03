@@ -11,21 +11,26 @@
         <h1>Student Grouping Tool</h1>
         <h2 id="current-class-display">No class loaded</h2>
         <div class="controls">
-        <div id="class-buttons">
-            <button id="load701Btn">701</button>
-            <button id="load702Btn">702</button>
-            <button id="load703Btn">703</button>
-            <button id="load704Btn">704</button>
-        </div>
-        <input type="number" id="groupSizeInput" placeholder="Group Size" min="2">
+            <div id="class-buttons">
+                <button id="load701Btn">701</button>
+                <button id="load702Btn">702</button>
+                <button id="load703Btn">703</button>
+                <button id="load704Btn">704</button>
+            </div>
+            <input type="number" id="groupSizeInput" placeholder="Group Size" min="2">
             <button id="createGroupsBtn">Create Groups</button>
             <button id="shuffleBtn" style="display: none;">Shuffle</button>
             <button id="saveBtn" style="display: none;">Save Groups</button>
+            <input type="text" id="incompatibleInput" placeholder="Enter two names, e.g. Alice,Bob">
+            <button id="markIncompatibleBtn">Mark Incompatible</button>
+            <button id="addGroupBtn">Add New Group</button>
         </div>
         <div id="groupsContainer" class="groups-container"></div>
         <div id="historyControls" class="controls" style="display: none; margin-top: 20px;">
             <label for="historyInput">Load History:</label>
             <input type="file" id="historyInput" accept=".json">
+            <input type="date" id="historyDateInput">
+            <button id="loadDateBtn">Load from Date</button>
         </div>
     </div>
     <script src="script.js"></script>

@@ -1,15 +1,30 @@
 let currentStudents = [];
-let groupHistory = {}; // Changed to an object
-let currentClassId = null; // To track the current class
+let groupHistory = {}; // Changed to object to store history by class
+let currentClassId = null; // Track the current class
+let incompatiblePairs = new Set();
 
-async function loadStudents(classId, file) {
+async function loadStudents(classId) {
     try {
-        const response = await fetch(file);
+        const response = await fetch(`/students/${classId}`);
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
         const text = await response.text();
-        currentStudents = text.split('\n').filter(name => name.trim() !== '');
-        currentClassId = classId;
+        currentStudents = text.split('\n')
+            .map(name => name.trim())
+            .filter(name => name !== '');
+        currentClassId = classId; // Set the current class ID
+        
+        // Load history for this class automatically
+        await loadHistoryForClass(classId);
+        
+        // Initialize history for this class if it doesn't exist
+        if (!groupHistory[classId]) {
+            groupHistory[classId] = [];
+        }
+        
         document.getElementById('current-class-display').textContent = `Class ${classId} Loaded`;
-
+        
         // Apply color theme
         document.body.classList.remove('theme-701', 'theme-702', 'theme-703', 'theme-704');
         document.body.classList.add(`theme-${classId}`);
@@ -17,18 +32,18 @@ async function loadStudents(classId, file) {
         document.getElementById('groupsContainer').innerHTML = '';
         document.getElementById('shuffleBtn').style.display = 'none';
         document.getElementById('saveBtn').style.display = 'none';
-        document.getElementById('historyControls').style.display = 'flex'; // Show history controls on class load
     } catch (error) {
         console.error('Error loading student file:', error);
-        alert(`Failed to load ${file}.`);
+        alert(`Failed to load students for class ${classId}.`);
     }
 }
 
 function initializeApp() {
-    document.getElementById('load701Btn').addEventListener('click', () => loadStudents('701', '701.txt'));
-document.getElementById('load702Btn').addEventListener('click', () => loadStudents('702', '702.txt'));
-document.getElementById('load703Btn').addEventListener('click', () => loadStudents('703', '703.txt'));
-document.getElementById('load704Btn').addEventListener('click', () => loadStudents('704', '704.txt'));
+    // Set up event listeners
+    document.getElementById('load701Btn').addEventListener('click', () => loadStudents('701'));
+    document.getElementById('load702Btn').addEventListener('click', () => loadStudents('702'));
+    document.getElementById('load703Btn').addEventListener('click', () => loadStudents('703'));
+    document.getElementById('load704Btn').addEventListener('click', () => loadStudents('704'));
 
 document.getElementById('createGroupsBtn').addEventListener('click', () => {
     const groupSize = parseInt(document.getElementById('groupSizeInput').value);
@@ -53,6 +68,11 @@ document.getElementById('shuffleBtn').addEventListener('click', () => {
     const groupSize = parseInt(document.getElementById('groupSizeInput').value);
     if (isNaN(groupSize) || groupSize < 2) {
         alert('Please enter a valid group size (2 or more)');
+        return;
+    }
+    
+    if (!currentClassId) {
+        alert('Please load a class first');
         return;
     }
 
@@ -121,7 +141,7 @@ document.getElementById('shuffleBtn').addEventListener('click', () => {
     });
 });
 
-document.getElementById('saveBtn').addEventListener('click', () => {
+document.getElementById('saveBtn').addEventListener('click', async () => {
     if (!currentClassId) {
         alert('Please load a class before saving.');
         return;
@@ -138,7 +158,8 @@ document.getElementById('saveBtn').addEventListener('click', () => {
 
     const newHistoryEntry = {
         timestamp: new Date().toISOString(),
-        groups: groups
+        groups: groups,
+        incompatiblePairs: Array.from(incompatiblePairs)
     };
 
     if (!groupHistory[currentClassId]) {
@@ -146,13 +167,23 @@ document.getElementById('saveBtn').addEventListener('click', () => {
     }
     groupHistory[currentClassId].push(newHistoryEntry);
 
-    const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(groupHistory, null, 2));
-    const downloadAnchorNode = document.createElement('a');
-    downloadAnchorNode.setAttribute("href",     dataStr);
-    downloadAnchorNode.setAttribute("download", "group_history.json");
-    document.body.appendChild(downloadAnchorNode); // required for firefox
-    downloadAnchorNode.click();
-    downloadAnchorNode.remove();
+    try {
+        const response = await fetch(`/history/${currentClassId}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(groupHistory[currentClassId], null, 2),
+        });
+        if (response.ok) {
+            alert('History saved successfully!');
+        } else {
+            throw new Error('Failed to save history');
+        }
+    } catch (error) {
+        console.error('Error saving history:', error);
+        alert('Error saving history.');
+    }
 });
 
 document.getElementById('historyInput').addEventListener('change', (event) => {
@@ -179,6 +210,84 @@ document.getElementById('historyInput').addEventListener('change', (event) => {
     };
     reader.readAsText(file);
 });
+
+document.getElementById('markIncompatibleBtn').addEventListener('click', () => {
+    const input = document.getElementById('incompatibleInput').value;
+    const names = input.split(',').map(n => n.trim()).filter(n => n);
+    if (names.length === 2) {
+        const pair = names.sort().join('|');
+        incompatiblePairs.add(pair);
+        document.getElementById('incompatibleInput').value = '';
+        alert('Students marked as incompatible');
+    } else {
+        alert('Please enter exactly two names separated by comma');
+    }
+});
+
+document.getElementById('addGroupBtn').addEventListener('click', () => {
+    const groupsContainer = document.getElementById('groupsContainer');
+    const existingGroups = document.querySelectorAll('.group');
+    const numGroups = existingGroups.length + 1;
+    const groupDiv = document.createElement('div');
+    groupDiv.className = 'group';
+    groupDiv.id = `group-${numGroups}`;
+    groupDiv.innerHTML = `<h3>Group ${numGroups}</h3>`;
+    addDropHandlers(groupDiv);
+    groupsContainer.appendChild(groupDiv);
+});
+
+document.getElementById('loadDateBtn').addEventListener('click', () => {
+    const selectedDate = document.getElementById('historyDateInput').value;
+    if (!selectedDate) {
+        alert('Please select a date');
+        return;
+    }
+    if (!currentClassId) {
+        alert('Please load a class first');
+        return;
+    }
+    const history = groupHistory[currentClassId];
+    if (!history || history.length === 0) {
+        alert('No history available for this class');
+        return;
+    }
+    
+    const selectedDateObj = new Date(selectedDate);
+    const entriesOnDate = history.filter(entry => {
+        const entryDate = new Date(entry.timestamp);
+        return entryDate.toDateString() === selectedDateObj.toDateString();
+    });
+    
+    if (entriesOnDate.length === 0) {
+        alert('No groups saved on this date');
+        return;
+    }
+    
+    // Load the latest entry for that date
+    const latestEntry = entriesOnDate.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp))[0];
+    loadGroupsFromEntry(latestEntry);
+    alert(`Loaded groups from ${selectedDate}`);
+});
+}
+
+async function loadHistoryForClass(classId) {
+    try {
+        const response = await fetch(`/history/${classId}`);
+        if (!response.ok) {
+            // History file doesn't exist, that's fine
+            return;
+        }
+        const history = await response.json();
+        groupHistory[classId] = history;
+        // Load incompatible pairs from the last history entry
+        if (history.length > 0) {
+            const lastEntry = history[history.length - 1];
+            incompatiblePairs = new Set(lastEntry.incompatiblePairs || []);
+        }
+        console.log(`History loaded for class ${classId}`);
+    } catch (error) {
+        console.log(`No history file found for class ${classId}`);
+    }
 }
 
 function getHistoricalPairs(classHistory) {
@@ -201,6 +310,7 @@ function getHistoricalPairs(classHistory) {
 
 function calculateScore(groups, historicalPairs) {
     let score = 0;
+    let incompatiblePenalty = 0;
     groups.forEach(group => {
         for (let i = 0; i < group.length; i++) {
             for (let j = i + 1; j < group.length; j++) {
@@ -208,64 +318,50 @@ function calculateScore(groups, historicalPairs) {
                 if (historicalPairs.has(pair)) {
                     score++;
                 }
+                if (incompatiblePairs.has(pair)) {
+                    incompatiblePenalty += 1000;
+                }
             }
         }
     });
-    return score;
+    return score + incompatiblePenalty;
 }
 
 function createGroups(students, groupSize) {
     const groupsContainer = document.getElementById('groupsContainer');
     groupsContainer.innerHTML = '';
-    alert(`Creating groups for ${students.length} students.`);
-
-    const historicalPairs = getHistoricalPairs(groupHistory[currentClassId]);
-    let bestGrouping = [];
-    let bestScore = Infinity;
-
-    // If there are no students, exit the function
-    if (students.length === 0) {
-        return;
-    }
-
-    for (let attempt = 0; attempt < 100; attempt++) {
-        const shuffled = [...students].sort(() => 0.5 - Math.random());
-        const currentGrouping = [];
-        for (let i = 0; i < shuffled.length; i += groupSize) {
-            currentGrouping.push(shuffled.slice(i, i + groupSize));
-        }
-
-        const score = calculateScore(currentGrouping, historicalPairs);
-
-        if (score < bestScore) {
-            bestScore = score;
-            bestGrouping = currentGrouping;
-        }
-
-        if (bestScore === 0) {
-            break; // Found a perfect grouping
-        }
-    }
-
-    console.log(`Best group score: ${bestScore} (0 is best)`);
-
-    bestGrouping.forEach((groupStudents, index) => {
-        const groupNumber = index + 1;
+    
+    // Shuffle students
+    const shuffledStudents = [...students].sort(() => 0.5 - Math.random());
+    
+    // Calculate number of groups needed
+    const numGroups = Math.ceil(students.length / groupSize);
+    
+    // Create groups
+    for (let i = 0; i < numGroups; i++) {
         const groupDiv = document.createElement('div');
         groupDiv.className = 'group';
-        groupDiv.id = `group-${groupNumber}`;
-        groupDiv.innerHTML = `<h3>Group ${groupNumber}</h3>`;
-
-        addDropHandlers(groupDiv);
-
-        groupStudents.forEach(studentName => {
-            const studentDiv = createStudentElement(studentName);
-            groupDiv.appendChild(studentDiv);
+        groupDiv.id = `group-${i + 1}`;
+        groupDiv.innerHTML = `<h3>Group ${i + 1}</h3>`;
+        
+        // Add students to group
+        const start = i * groupSize;
+        const end = start + groupSize;
+        const groupStudents = shuffledStudents.slice(start, end);
+        
+        groupStudents.forEach(student => {
+            groupDiv.appendChild(createStudentElement(student));
         });
-
+        
+        addDropHandlers(groupDiv);
         groupsContainer.appendChild(groupDiv);
-    });
+    }
+    
+    // Show action buttons
+    document.getElementById('shuffleBtn').style.display = 'inline-block';
+    document.getElementById('saveBtn').style.display = 'inline-block';
 }
+
 
 let draggedItem = null;
 
@@ -289,21 +385,24 @@ function createStudentElement(studentName) {
     const studentDiv = document.createElement('div');
     studentDiv.className = 'student';
     studentDiv.draggable = true;
-
+    
     const studentNameSpan = document.createElement('span');
     studentNameSpan.textContent = studentName;
-
+    
     const lockIcon = document.createElement('span');
     lockIcon.className = 'lock-icon';
-    lockIcon.innerHTML = '&#128275;'; // Unlocked icon
-    lockIcon.addEventListener('click', () => {
+    lockIcon.textContent = '🔒';
+    
+    lockIcon.addEventListener('click', (e) => {
+        e.stopPropagation();
         const isLocked = studentDiv.classList.toggle('locked');
-        lockIcon.innerHTML = isLocked ? '&#128274;' : '&#128275;'; // Locked vs Unlocked
+        lockIcon.textContent = isLocked ? '🔓' : '🔒';
         studentDiv.draggable = !isLocked;
     });
-
+    
     studentDiv.appendChild(studentNameSpan);
     studentDiv.appendChild(lockIcon);
+    
     addDragHandlers(studentDiv);
     return studentDiv;
 }
