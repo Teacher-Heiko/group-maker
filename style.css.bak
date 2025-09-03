@@ -43,24 +43,7 @@ button {
 }
 
 button:hover {
-
-/* Class button specific styles */
-.class-btn {
-    background-color: #6c757d; /* Grey by default */
-    color: white;
-}
-
-.class-btn:hover {
-    background-color: #5a6268; /* Darker grey on hover */
-}
-
-.class-btn.selected {
-    background-color: #007bff; /* Blue when selected */
-}
-
-.class-btn.selected:hover {
-    background-color: #0056b3; /* Darker blue on hover when selected */
-}    background-color: #0056b3;
+    background-color: #0056b3;
 }
 
 .groups-container {

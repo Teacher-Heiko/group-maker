@@ -15,7 +15,8 @@ function showStartScreen() {
     currentStudents = [];
     selectedAction = null;
     // Clear any class theme
-    document.body.classList.remove('theme-701', 'theme-702', 'theme-703', 'theme-704');
+    // Reset class button selection
+    document.querySelectorAll('.class-btn').forEach(btn => btn.classList.remove('selected'));    document.body.classList.remove('theme-701', 'theme-702', 'theme-703', 'theme-704');
 }
 
 function showMainScreen() {
@@ -141,7 +142,9 @@ function loadGroupsFromEntry(entry) {
 
 // Event handlers for start screen
 function handleClassSelection(classId) {
-    loadStudents(classId).then(success => {
+    // Update visual selection of class buttons
+    document.querySelectorAll('.class-btn').forEach(btn => btn.classList.remove('selected'));
+    document.getElementById(`load${classId}Btn`).classList.add('selected');    loadStudents(classId).then(success => {
         if (success) {
             if (selectedAction === 'new') {
                 console.log("Showing main screen after timestamp load..."); showMainScreen(); console.log("Main screen shown, back button should work now");

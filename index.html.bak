@@ -15,10 +15,10 @@
             <h2>Choose your class and action</h2>
             <div class="start-controls">
                 <div id="class-buttons">
-                    <button id="load701Btn" class="class-btn">701</button>
-                    <button id="load702Btn" class="class-btn">702</button>
-                    <button id="load703Btn" class="class-btn">703</button>
-                    <button id="load704Btn" class="class-btn">704</button>
+                    <button id="load701Btn">701</button>
+                    <button id="load702Btn">702</button>
+                    <button id="load703Btn">703</button>
+                    <button id="load704Btn">704</button>
                 </div>
                 <div class="action-buttons">
                     <button id="createNewBtn" class="action-btn">Create New Groups</button>

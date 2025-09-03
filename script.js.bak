@@ -9,7 +9,8 @@ function showStartScreen() {
     document.getElementById('startScreen').style.display = 'block';
     document.getElementById('mainScreen').style.display = 'none';
     document.getElementById('timestampSelection').style.display = 'none';
-    // Reset state
+    // Ensure start controls are visible
+    document.querySelector('.start-controls').style.display = 'block';    // Reset state
     currentClassId = null;
     currentStudents = [];
     selectedAction = null;
@@ -29,7 +30,8 @@ function showTimestampSelection() {
 
 function hideTimestampSelection() {
     document.getElementById('timestampSelection').style.display = 'none';
-    document.querySelector('.start-controls').style.display = 'block';
+    // Ensure start controls are visible
+    document.querySelector('.start-controls').style.display = 'block';    document.querySelector('.start-controls').style.display = 'block';
 }
 
 // Load students function
@@ -139,7 +141,9 @@ function loadGroupsFromEntry(entry) {
 
 // Event handlers for start screen
 function handleClassSelection(classId) {
-    loadStudents(classId).then(success => {
+    // Update visual selection of class buttons
+    document.querySelectorAll('.class-btn').forEach(btn => btn.classList.remove('selected'));
+    document.getElementById(`load${classId}Btn`).classList.add('selected');    loadStudents(classId).then(success => {
         if (success) {
             if (selectedAction === 'new') {
                 console.log("Showing main screen after timestamp load..."); showMainScreen(); console.log("Main screen shown, back button should work now");
