@@ -9,28 +9,44 @@
 <body>
     <div class="container">
         <h1>Student Grouping Tool</h1>
-        <h2 id="current-class-display">No class loaded</h2>
-        <div class="controls">
-            <div id="class-buttons">
-                <button id="load701Btn">701</button>
-                <button id="load702Btn">702</button>
-                <button id="load703Btn">703</button>
-                <button id="load704Btn">704</button>
+        
+        <!-- Start Screen -->
+        <div id="startScreen">
+            <h2>Choose your class and action</h2>
+            <div class="start-controls">
+                <div id="class-buttons">
+                    <button id="load701Btn">701</button>
+                    <button id="load702Btn">702</button>
+                    <button id="load703Btn">703</button>
+                    <button id="load704Btn">704</button>
+                </div>
+                <div class="action-buttons">
+                    <button id="createNewBtn" class="action-btn">Create New Groups</button>
+                    <button id="loadHistoryBtn" class="action-btn">Load from History</button>
+                </div>
             </div>
-            <input type="number" id="groupSizeInput" placeholder="Group Size" min="2">
-            <button id="createGroupsBtn">Create Groups</button>
-            <button id="shuffleBtn" style="display: none;">Shuffle</button>
-            <button id="saveBtn" style="display: none;">Save Groups</button>
-            <input type="text" id="incompatibleInput" placeholder="Enter two names, e.g. Alice,Bob">
-            <button id="markIncompatibleBtn">Mark Incompatible</button>
-            <button id="addGroupBtn">Add New Group</button>
+            <div id="timestampSelection" style="display: none;">
+                <h3>Select a timestamp to load:</h3>
+                <select id="historyTimestampDropdown"></select>
+                <button id="loadTimestampBtn">Load Groups</button>
+                <button id="backToStartBtn">Back</button>
+            </div>
         </div>
-        <div id="groupsContainer" class="groups-container"></div>
-        <div id="historyControls" class="controls" style="display: none; margin-top: 20px;">
-            <label for="historyInput">Load History:</label>
-            <input type="file" id="historyInput" accept=".json">
-            <input type="date" id="historyDateInput">
-            <button id="loadDateBtn">Load from Date</button>
+        
+        <!-- Main App Screen -->
+        <div id="mainScreen" style="display: none;">
+            <h2 id="current-class-display">No class loaded</h2>
+            <div class="controls">
+                <input type="number" id="groupSizeInput" placeholder="Group Size" min="2">
+                <button id="createGroupsBtn">Create Groups</button>
+                <button id="shuffleBtn" style="display: none;">Shuffle</button>
+                <button id="saveBtn" style="display: none;">Save Groups</button>
+                <input type="text" id="incompatibleInput" placeholder="Enter two names, e.g. Alice,Bob">
+                <button id="markIncompatibleBtn">Mark Incompatible</button>
+                <button id="addGroupBtn">Add New Group</button>
+                <button id="backToStartMainBtn">Back to Start</button>
+            </div>
+            <div id="groupsContainer" class="groups-container"></div>
         </div>
     </div>
     <script src="script.js"></script>

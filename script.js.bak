@@ -9,8 +9,7 @@ function showStartScreen() {
     document.getElementById('startScreen').style.display = 'block';
     document.getElementById('mainScreen').style.display = 'none';
     document.getElementById('timestampSelection').style.display = 'none';
-    // Ensure start controls are visible
-    document.querySelector('.start-controls').style.display = 'block';    // Reset state
+    // Reset state
     currentClassId = null;
     currentStudents = [];
     selectedAction = null;
@@ -30,8 +29,7 @@ function showTimestampSelection() {
 
 function hideTimestampSelection() {
     document.getElementById('timestampSelection').style.display = 'none';
-    // Ensure start controls are visible
-    document.querySelector('.start-controls').style.display = 'block';    document.querySelector('.start-controls').style.display = 'block';
+    document.querySelector('.start-controls').style.display = 'block';
 }
 
 // Load students function

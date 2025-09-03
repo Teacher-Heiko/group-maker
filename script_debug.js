@@ -9,8 +9,7 @@ function showStartScreen() {
     document.getElementById('startScreen').style.display = 'block';
     document.getElementById('mainScreen').style.display = 'none';
     document.getElementById('timestampSelection').style.display = 'none';
-    // Ensure start controls are visible
-    document.querySelector('.start-controls').style.display = 'block';    // Reset state
+    // Reset state
     currentClassId = null;
     currentStudents = [];
     selectedAction = null;
@@ -30,8 +29,7 @@ function showTimestampSelection() {
 
 function hideTimestampSelection() {
     document.getElementById('timestampSelection').style.display = 'none';
-    // Ensure start controls are visible
-    document.querySelector('.start-controls').style.display = 'block';    document.querySelector('.start-controls').style.display = 'block';
+    document.querySelector('.start-controls').style.display = 'block';
 }
 
 // Load students function
@@ -144,7 +142,7 @@ function handleClassSelection(classId) {
     loadStudents(classId).then(success => {
         if (success) {
             if (selectedAction === 'new') {
-                console.log("Showing main screen after timestamp load..."); showMainScreen(); console.log("Main screen shown, back button should work now");
+                showMainScreen();
                 // Clear any existing groups
                 document.getElementById('groupsContainer').innerHTML = '';
                 document.getElementById('shuffleBtn').style.display = 'none';
@@ -156,7 +154,7 @@ function handleClassSelection(classId) {
                 } else {
                     alert('No history found for this class. Creating new groups instead.');
                     selectedAction = 'new';
-                    console.log("Showing main screen after timestamp load..."); showMainScreen(); console.log("Main screen shown, back button should work now");
+                    showMainScreen();
                 }
             }
         }
@@ -312,7 +310,7 @@ function initializeApp() {
     document.getElementById('createNewBtn').addEventListener('click', () => {
         selectedAction = 'new';
         if (currentClassId) {
-            console.log("Showing main screen after timestamp load..."); showMainScreen(); console.log("Main screen shown, back button should work now");
+            showMainScreen();
         } else {
             alert('Please select a class first');
         }
@@ -334,7 +332,7 @@ function initializeApp() {
 
     // Back buttons
     document.getElementById('backToStartBtn').addEventListener('click', hideTimestampSelection);
-    const backToStartMainBtn = document.getElementById('backToStartMainBtn'); console.log('Back to start button found:', backToStartMainBtn); if (backToStartMainBtn) { backToStartMainBtn.addEventListener('click', function() { console.log('Back to start button clicked!'); showStartScreen(); }); } else { console.error('Back to start button not found!'); }
+    document.getElementById('backToStartMainBtn').addEventListener('click', showStartScreen);
 
     // Timestamp selection
     document.getElementById('loadTimestampBtn').addEventListener('click', () => {
@@ -343,8 +341,8 @@ function initializeApp() {
         if (selectedIndex !== '' && currentClassId && groupHistory[currentClassId]) {
             const entry = groupHistory[currentClassId][selectedIndex];
             if (entry) {
-                console.log("Loading groups from timestamp..."); loadGroupsFromEntry(entry);
-                console.log("Showing main screen after timestamp load..."); showMainScreen(); console.log("Main screen shown, back button should work now");
+                loadGroupsFromEntry(entry);
+                showMainScreen();
             }
         } else {
             alert('Please select a timestamp');
