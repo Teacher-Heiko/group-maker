@@ -1,0 +1,107 @@
+[
+  {
+    "timestamp": "2025-08-25T02:45:19.535Z",
+    "groups": [
+      [
+        "Arthur",
+        "Joshua"
+      ],
+      [
+        "Otis",
+        "Zhan Zhan"
+      ],
+      [
+        "Paul",
+        "Peem"
+      ],
+      [
+        "Seoulta",
+        "Thanwa"
+      ],
+      [
+        "PanPan",
+        "Lipda"
+      ],
+      [
+        "Timwy"
+      ],
+      [
+        "Angela",
+        "April"
+      ],
+      [
+        "Kpan",
+        "Justine"
+      ],
+      [
+        "Ravit",
+        "Run"
+      ],
+      [
+        "Yuuki",
+        "Tonnam"
+      ],
+      [
+        "ShiRyu",
+        "Thunwa"
+      ]
+    ],
+    "incompatiblePairs": [
+      "ShiRyu|Thanwa"
+    ]
+  },
+  {
+    "timestamp": "2025-09-01T02:49:23.296Z",
+    "groups": [
+      [
+        "Arthur",
+        "Peem"
+      ],
+      [
+        "Otis",
+        "April"
+      ],
+      [
+        "Paul",
+        "Joshua"
+      ],
+      [
+        "Seoulta",
+        "PanPan"
+      ],
+      [
+        "Lipda"
+      ],
+      [
+        "Run",
+        "Justine"
+      ],
+      [
+        "ShiRyu",
+        "Thanwa"
+      ],
+      [
+        "Kpan",
+        "Tonnam"
+      ],
+      [
+        "Ravit",
+        "Timwy"
+      ],
+      [
+        "Yuuki",
+        "Zhan Zhan"
+      ],
+      [
+        "Thunwa",
+        "Angela"
+      ]
+    ],
+    "incompatiblePairs": [
+      "ShiRyu|Thanwa",
+      "Angela|April",
+      "Arthur|Justine",
+      "Run|Yukki"
+    ]
+  }
+]
