@@ -135,5 +135,53 @@
       "Punn|Ryu",
       "Ryu|Shogun"
     ]
+  },
+  {
+    "timestamp": "2025-09-10T05:02:41.242Z",
+    "groups": [
+      [
+        "Linda",
+        "Don"
+      ],
+      [
+        "Boon",
+        "Inc"
+      ],
+      [
+        "Proud",
+        "Mi"
+      ],
+      [
+        "Punn",
+        "Hopper"
+      ],
+      [
+        "Tee",
+        "Sky"
+      ],
+      [
+        "Muse",
+        "Chak"
+      ],
+      [
+        "Gao",
+        "Shogun"
+      ],
+      [
+        "Ryu",
+        "Ozone"
+      ],
+      [
+        "Aidyn",
+        "Vayo"
+      ]
+    ],
+    "incompatiblePairs": [
+      "Shogun|Tee",
+      "Punn|Ryu",
+      "Ryu|Shogun",
+      "Boon|Ozone",
+      "Chak|Gao"
+    ]
   }
 ]

@@ -103,5 +103,204 @@
       "Arthur|Justine",
       "Run|Yukki"
     ]
+  },
+  {
+    "timestamp": "2025-09-08T05:47:47.162Z",
+    "groups": [
+      [
+        "Justine",
+        "Seoulta",
+        "April"
+      ],
+      [
+        "Angela",
+        "Peem"
+      ],
+      [
+        "Zhan Zhan",
+        "PanPan"
+      ],
+      [
+        "Tonnam",
+        "Otis"
+      ],
+      [
+        "Yuuki",
+        "Timwy"
+      ],
+      [
+        "Ravit",
+        "Thunwa"
+      ],
+      [
+        "Run",
+        "Kpan"
+      ],
+      [
+        "Paul",
+        "ShiRyu"
+      ],
+      [
+        "Joshua"
+      ],
+      [
+        "Lipda",
+        "Arthur",
+        "Thanwa"
+      ],
+      []
+    ],
+    "incompatiblePairs": [
+      "ShiRyu|Thanwa"
+    ]
+  },
+  {
+    "timestamp": "2025-09-08T05:49:48.501Z",
+    "groups": [
+      [
+        "April",
+        "Seoulta"
+      ],
+      [
+        "Angela",
+        "Peem"
+      ],
+      [
+        "Zhan Zhan",
+        "PanPan"
+      ],
+      [
+        "Tonnam",
+        "Otis"
+      ],
+      [
+        "Yuuki",
+        "Timwy"
+      ],
+      [
+        "Ravit",
+        "Thunwa"
+      ],
+      [
+        "Run",
+        "Kpan"
+      ],
+      [
+        "Paul",
+        "ShiRyu"
+      ],
+      [
+        "Joshua",
+        "Justine"
+      ],
+      [
+        "Lipda",
+        "Arthur",
+        "Thanwa"
+      ],
+      []
+    ],
+    "incompatiblePairs": [
+      "ShiRyu|Thanwa"
+    ]
+  },
+  {
+    "timestamp": "2025-09-08T05:54:47.259Z",
+    "groups": [
+      [
+        "April",
+        "Seoulta"
+      ],
+      [
+        "Angela",
+        "Peem"
+      ],
+      [
+        "Zhan Zhan",
+        "PanPan"
+      ],
+      [
+        "Tonnam",
+        "Otis"
+      ],
+      [
+        "Yuuki",
+        "Timwy"
+      ],
+      [
+        "Ravit",
+        "Thunwa"
+      ],
+      [
+        "Run",
+        "Kpan"
+      ],
+      [
+        "Paul",
+        "ShiRyu"
+      ],
+      [
+        "Joshua",
+        "Justine"
+      ],
+      [
+        "Lipda",
+        "Arthur",
+        "Thanwa"
+      ],
+      []
+    ],
+    "incompatiblePairs": [
+      "ShiRyu|Thanwa"
+    ]
+  },
+  {
+    "timestamp": "2025-09-10T05:08:42.462Z",
+    "groups": [
+      [
+        "April",
+        "Timwy"
+      ],
+      [
+        "Paul",
+        "Seoulta"
+      ],
+      [
+        "ShiRyu",
+        "Run"
+      ],
+      [
+        "Justine",
+        "Thunwa"
+      ],
+      [
+        "Otis",
+        "Joshua"
+      ],
+      [
+        "Arthur",
+        "Tonnam"
+      ],
+      [
+        "PanPan",
+        "Kpan"
+      ],
+      [
+        "Angela",
+        "Ravit"
+      ],
+      [
+        "Yuuki",
+        "Lipda"
+      ],
+      [
+        "Zhan Zhan",
+        "Peem"
+      ]
+    ],
+    "incompatiblePairs": [
+      "ShiRyu|Thanwa",
+      "Kpan|Seoulta"
+    ]
   }
 ]
