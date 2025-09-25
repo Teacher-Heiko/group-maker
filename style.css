@@ -215,3 +215,29 @@ button:hover {
 #backToStartMainBtn:hover {
     background-color: #5a6268;
 }
+
+/* Input group styling */
+.input-group {
+    display: flex;
+    flex-direction: column;
+    margin: 10px 0;
+}
+
+.input-group label {
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+.input-group input {
+    padding: 8px;
+    border: 2px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+    width: 200px;
+}
+
+.input-group input:focus {
+    border-color: #007bff;
+    outline: none;
+}

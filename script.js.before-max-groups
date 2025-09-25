@@ -220,63 +220,31 @@ function handleClassSelection(classId) {
 }
 
 // Group creation and management functions
-function createGroups(students, minGroupSize, maxGroups) {
+function createGroups(students, groupSize) {
     const groupsContainer = document.getElementById('groupsContainer');
     groupsContainer.innerHTML = '';
     
     const shuffledStudents = [...students].sort(() => 0.5 - Math.random());
-    const totalStudents = students.length;
+    const numGroups = Math.ceil(students.length / groupSize);
     
-    let numGroups;
-    let actualGroupSize;
-    
-    if (maxGroups && maxGroups > 0) {
-        // Use maxGroups constraint
-        numGroups = Math.min(maxGroups, Math.ceil(totalStudents / minGroupSize));
+    for (let i = 0; i < numGroups; i++) {
+        const groupDiv = document.createElement('div');
+        groupDiv.className = 'group';
+        groupDiv.id = `group-${i + 1}`;
+        groupDiv.innerHTML = `<h3>Group ${i + 1}</h3>`;
         
-        // Calculate how students should be distributed
-        const baseSize = Math.floor(totalStudents / numGroups);
-        const remainder = totalStudents % numGroups;
+        const start = i * groupSize;
+        const end = start + groupSize;
+        const groupStudents = shuffledStudents.slice(start, end);
         
-        // If base size is less than minGroupSize, we need to adjust
-        if (baseSize < minGroupSize) {
-            numGroups = Math.floor(totalStudents / minGroupSize);
-            if (numGroups === 0) numGroups = 1; // At least one group
-        }
+        groupStudents.forEach(student => {
+            groupDiv.appendChild(createStudentElement(student));
+        });
         
-        actualGroupSize = Math.ceil(totalStudents / numGroups);
-    } else {
-        // Original logic when no maxGroups specified
-        numGroups = Math.ceil(totalStudents / minGroupSize);
-        actualGroupSize = minGroupSize;
+        addDropHandlers(groupDiv);
+        groupsContainer.appendChild(groupDiv);
     }
     
-    // Create groups with balanced distribution
-    const groups = Array.from({length: numGroups}, () => []);
-    
-    shuffledStudents.forEach((student, index) => {
-        const groupIndex = index % numGroups;
-        groups[groupIndex].push(student);
-    });
-    
-    // Create DOM elements for each group
-    groups.forEach((groupStudents, i) => {
-        if (groupStudents.length > 0) { // Only create non-empty groups
-            const groupDiv = document.createElement('div');
-            groupDiv.className = 'group';
-            groupDiv.id = `group-${i + 1}`;
-            groupDiv.innerHTML = `<h3>Group ${i + 1}</h3>`;
-            
-            groupStudents.forEach(student => {
-                groupDiv.appendChild(createStudentElement(student));
-            });
-            
-            addDropHandlers(groupDiv);
-            groupsContainer.appendChild(groupDiv);
-        }
-    });
-    
-    // Show action buttons
     document.getElementById('shuffleBtn').style.display = 'inline-block';
     document.getElementById('saveBtn').style.display = 'inline-block';
 }
@@ -442,38 +410,28 @@ function initializeApp() {
 
     // Main screen functionality
     document.getElementById('createGroupsBtn').addEventListener('click', () => {
-        const minGroupSize = parseInt(document.getElementById('groupSizeInput').value);
-        const maxGroups = parseInt(document.getElementById('maxGroupsInput').value);
+        const groupSize = parseInt(document.getElementById('groupSizeInput').value);
 
         if (currentStudents.length === 0) {
             alert('Please load a class list first');
             return;
         }
 
-        if (isNaN(minGroupSize) || minGroupSize < 1) {
-            alert('Please enter a valid minimum group size (1 or more)');
+        if (isNaN(groupSize) || groupSize < 1) {
+            alert('Please enter a valid group size (1 or more)');
             return;
         }
 
-        if (!isNaN(maxGroups) && maxGroups < 1) {
-            alert('Maximum number of groups must be 1 or more (or leave empty)');
-            return;
-        }
-
-        createGroups(currentStudents, minGroupSize, maxGroups);    });
+        createGroups(currentStudents, groupSize);
+    });
 
     document.getElementById('shuffleBtn').addEventListener('click', () => {
-        const minGroupSize = parseInt(document.getElementById('groupSizeInput').value);
-        const maxGroups = parseInt(document.getElementById('maxGroupsInput').value);
-        if (isNaN(minGroupSize) || minGroupSize < 1) {
-            alert('Please enter a valid minimum group size (1 or more)');
+        const groupSize = parseInt(document.getElementById('groupSizeInput').value);
+        if (isNaN(groupSize) || groupSize < 1) {
+            alert('Please enter a valid group size (1 or more)');
             return;
         }
         
-        if (!isNaN(maxGroups) && maxGroups < 1) {
-            alert('Maximum number of groups must be 1 or more (or leave empty)');
-            return;
-        }        
         if (!currentClassId) {
             alert('Please load a class first');
             return;
@@ -510,7 +468,7 @@ function initializeApp() {
             let studentIdx = 0;
             for (const groupEl of groupElements) {
                 const group = currentArrangement.get(groupEl.id);
-                while (group.length < minGroupSize && studentIdx < shuffled.length) {
+                while (group.length < groupSize && studentIdx < shuffled.length) {
                     group.push(shuffled[studentIdx++]);
                 }
             }
