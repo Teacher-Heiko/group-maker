@@ -497,5 +497,54 @@
       "ShiRyu|Thanwa",
       "Kpan|Seoulta"
     ]
+  },
+  {
+    "timestamp": "2025-09-25T02:25:56.730Z",
+    "groups": [
+      [
+        "PanPan",
+        "Angela"
+      ],
+      [
+        "Arthur",
+        "Kpan"
+      ],
+      [
+        "Seoulta",
+        "Run"
+      ],
+      [
+        "Justine",
+        "Ravit"
+      ],
+      [
+        "Lipda",
+        "Joshua"
+      ],
+      [
+        "Otis",
+        "Thunwa"
+      ],
+      [
+        "Yuuki",
+        "Peem"
+      ],
+      [
+        "April",
+        "Paul"
+      ],
+      [
+        "ShiRyu",
+        "Zhan Zhan"
+      ],
+      [
+        "Tonnam",
+        "Timwy"
+      ]
+    ],
+    "incompatiblePairs": [
+      "ShiRyu|Thanwa",
+      "Kpan|Seoulta"
+    ]
   }
 ]

@@ -363,7 +363,6 @@ function initializeApp() {
     document.getElementById('load702Btn').addEventListener('click', () => handleClassSelection('702'));
     document.getElementById('load703Btn').addEventListener('click', () => handleClassSelection('703'));
     document.getElementById('load704Btn').addEventListener('click', () => handleClassSelection('704'));
-    document.getElementById('load100245Btn').addEventListener('click', () => handleClassSelection('100245'));
 
     // Action button handlers
     document.getElementById('createNewBtn').addEventListener('click', () => {
