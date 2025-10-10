@@ -97,6 +97,11 @@ button:hover {
     cursor: grab;
 }
 
+.student span {
+    font-weight: bold;
+    font-size: 2.1em;
+}
+
 .student.locked {
     background-color: #d0e0f0;
     cursor: not-allowed;
