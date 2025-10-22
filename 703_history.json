@@ -287,5 +287,107 @@
       "Hong Kong|Nont",
       "Ampere|Porsche"
     ]
+  },
+  {
+    "timestamp": "2025-10-15T23:26:15.704Z",
+    "groups": [
+      [
+        "Porsche"
+      ],
+      [
+        "Gunn",
+        "Win Win"
+      ],
+      [
+        "Ik",
+        "Anya"
+      ],
+      [
+        "Poon",
+        "Nont"
+      ],
+      [
+        "New",
+        "Iq"
+      ],
+      [
+        "Ozone",
+        "Aerin"
+      ],
+      [
+        "Prai",
+        "Koon"
+      ],
+      [
+        "Nene",
+        "Prague"
+      ],
+      [],
+      [
+        "Hong Kong",
+        "Ampere"
+      ]
+    ],
+    "incompatiblePairs": [
+      "Anya|Gunn",
+      "Gunn|Hong Kong",
+      "Aerin|Ampere",
+      "Ampere|Koon",
+      "New|Nont",
+      "Hong Kong|Prague",
+      "Hong Kong|Nont",
+      "Ampere|Porsche"
+    ]
+  },
+  {
+    "timestamp": "2025-10-16T06:38:15.926Z",
+    "groups": [
+      [
+        "Porsche"
+      ],
+      [
+        "Gunn",
+        "Win Win"
+      ],
+      [
+        "Ik",
+        "Anya"
+      ],
+      [
+        "Poon",
+        "Nont"
+      ],
+      [
+        "New",
+        "Iq"
+      ],
+      [
+        "Ozone",
+        "Aerin"
+      ],
+      [
+        "Prai",
+        "Koon"
+      ],
+      [
+        "Nene",
+        "Prague"
+      ],
+      [],
+      [
+        "Hong Kong",
+        "Ampere"
+      ]
+    ],
+    "incompatiblePairs": [
+      "Anya|Gunn",
+      "Gunn|Hong Kong",
+      "Aerin|Ampere",
+      "Ampere|Koon",
+      "New|Nont",
+      "Hong Kong|Prague",
+      "Hong Kong|Nont",
+      "Ampere|Porsche"
+    ]
   }
 ]
