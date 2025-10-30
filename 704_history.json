@@ -384,5 +384,56 @@
       "Boon|Ozone",
       "Chak|Gao"
     ]
+  },
+  {
+    "timestamp": "2025-10-30T05:47:02.749Z",
+    "groups": [
+      [],
+      [
+        "Sky",
+        "Aidyn"
+      ],
+      [
+        "Punn",
+        "Ryu"
+      ],
+      [
+        "Gao",
+        "Linda"
+      ],
+      [
+        "Muse",
+        "Vayo"
+      ],
+      [
+        "Chak",
+        "Ozone"
+      ],
+      [
+        "Mi",
+        "Hopper"
+      ],
+      [],
+      [
+        "Boon",
+        "Proud"
+      ],
+      [
+        "Don",
+        "Inc"
+      ],
+      [],
+      [
+        "Shogun",
+        "Tee"
+      ]
+    ],
+    "incompatiblePairs": [
+      "Shogun|Tee",
+      "Punn|Ryu",
+      "Ryu|Shogun",
+      "Boon|Ozone",
+      "Chak|Gao"
+    ]
   }
 ]

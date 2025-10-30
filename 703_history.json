@@ -389,5 +389,56 @@
       "Hong Kong|Nont",
       "Ampere|Porsche"
     ]
+  },
+  {
+    "timestamp": "2025-10-29T23:47:50.060Z",
+    "groups": [
+      [],
+      [
+        "Aerin",
+        "Prague"
+      ],
+      [
+        "Win Win"
+      ],
+      [
+        "Nont",
+        "Koon"
+      ],
+      [
+        "Gunn",
+        "Porsche"
+      ],
+      [
+        "Iq",
+        "Poon"
+      ],
+      [
+        "Ik",
+        "New"
+      ],
+      [
+        "Ampere",
+        "Anya"
+      ],
+      [
+        "Ozone",
+        "Hong Kong"
+      ],
+      [
+        "Prai",
+        "Nene"
+      ]
+    ],
+    "incompatiblePairs": [
+      "Anya|Gunn",
+      "Gunn|Hong Kong",
+      "Aerin|Ampere",
+      "Ampere|Koon",
+      "New|Nont",
+      "Hong Kong|Prague",
+      "Hong Kong|Nont",
+      "Ampere|Porsche"
+    ]
   }
 ]
